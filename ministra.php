@@ -1,10 +1,25 @@
 <?php
 session_start();
-if (!isset($_SESSION['usuario'])) {
+if (!isset($_SESSION['usuario_id'])) {
     header("Location: login.php");
     exit();
 }
 
+require "db.php";
+
+$usuario_id = $_SESSION['usuario_id'];
+
+$stmt = $pdo->prepare("SELECT nombre_completo, correo, estado, id_rol FROM usuarios WHERE id_usuario = :id");
+$stmt->execute(['id' => $usuario_id]);
+$usuario = $stmt->fetch(PDO::FETCH_ASSOC);
+
+if (!$usuario || $usuario['id_rol'] != 1) { 
+    echo "Acceso denegado.";
+    exit();
+}
+
+$nombre = $usuario['nombre_completo'];
+$dui = $usuario['correo']; // ⚠️ Cámbialo si luego agregas el campo DUI real
 ?>
 
 <!DOCTYPE html>
@@ -37,9 +52,6 @@ if (!isset($_SESSION['usuario'])) {
             border-radius: 6px;
             box-shadow: 0px 2px 4px rgba(0,0,0,0.15);
         }
-        .card h2 {
-            margin-top: 0;
-        }
         a {
             display: inline-block;
             padding: 10px 14px;
@@ -58,51 +70,39 @@ if (!isset($_SESSION['usuario'])) {
 
 <div class="header">
     Panel de la Ministra de Educación<br>
-    Bienvenida: <?php echo $nombre; ?> | DUI: <?php echo $dui; ?>
+    Bienvenida: <?php echo $nombre; ?> | Identificador: <?php echo $dui; ?>
 </div>
 
 <div class="contenedor">
 
-    <!-- Reportes Nacionales -->
     <div class="card">
         <h2>📊 Reportes Nacionales</h2>
-        <p>Consulte los reportes de méritos y deméritos a nivel nacional.</p>
         <a href="reportes_nacionales.php">Ver reportes nacionales</a>
     </div>
 
-    <!-- Estadísticas Generales -->
     <div class="card">
         <h2>📈 Estadísticas del Sistema</h2>
-        <p>Visualice estadísticas globales de estudiantes, directores, maestros y más.</p>
         <a href="estadisticas.php">Ver estadísticas</a>
     </div>
 
-    <!-- Administrar usuarios -->
     <div class="card">
         <h2>👥 Administrar Usuarios</h2>
-        <p>Gestione directores, subdirectores, maestros y alumnos.</p>
-        
         <a href="admin_directores.php">Directores</a><br>
         <a href="admin_subdirectores.php">Subdirectores</a><br>
         <a href="admin_maestros.php">Maestros</a><br>
         <a href="admin_alumnos.php">Alumnos</a>
     </div>
 
-    <!-- Historial -->
     <div class="card">
         <h2>📚 Historial de Méritos y Deméritos</h2>
-        <p>Revise los registros históricos de todo el sistema.</p>
         <a href="historial_meritos_demeritos.php">Ver historial</a>
     </div>
 
-    <!-- Configuración del sistema -->
     <div class="card">
         <h2>⚙️ Configuraciones del Sistema</h2>
-        <p>Opciones avanzadas para modificar parámetros y reglas del sistema.</p>
         <a href="configuraciones.php">Configurar sistema</a>
     </div>
 
-    <!-- Cerrar sesión -->
     <div class="card">
         <h2>🔓 Cerrar Sesión</h2>
         <a href="logout.php">Cerrar</a>

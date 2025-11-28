@@ -5,11 +5,13 @@ ini_set('display_startup_errors', 1);
 error_reporting(E_ALL);
 
 include_once 'db_connect.php';
+
 session_start();
 
 $error = '';
 
 if($_SERVER['REQUEST_METHOD'] == 'POST') {
+    
     $correo = trim($_POST['correo'] ?? '');
     $password = $_POST['password'] ?? '';
 
@@ -22,11 +24,13 @@ if($_SERVER['REQUEST_METHOD'] == 'POST') {
         $stmt->bindParam(':correo', $correo);
         $stmt->execute();
 
+
         if ($stmt->rowCount() > 0) {
             $usuario = $stmt->fetch(PDO::FETCH_ASSOC);
 
+            
             // Verificación de contraseña
-            if (password_verify($password, $usuario['password_hash'])) {
+           if (password_verify($password, $usuario['password_hash'])) {
 
                 // Guardar sesión
                 $_SESSION['usuario'] = $usuario['correo'];
