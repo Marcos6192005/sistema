@@ -17,12 +17,11 @@ $config = [
     'color_sidebar' => '#2c3e50',
     
     'modulos' => [
-        ['titulo' => 'Estudiantes', 'icono' => 'people-fill', 'color' => 'primary', 'url' => 'estudiantes.php'],
-        ['titulo' => 'Maestros', 'icono' => 'person-badge-fill', 'color' => 'success', 'url' => 'maestros.php'],
-        ['titulo' => 'Grados y Secciones', 'icono' => 'collection-fill', 'color' => 'warning', 'url' => 'grados.php'],
-        ['titulo' => 'Deméritos', 'icono' => 'flag-fill', 'color' => 'danger', 'url' => 'demeritos.php'],
-        ['titulo' => 'Redenciones', 'icono' => 'hand-thumbs-up-fill', 'color' => 'info', 'url' => 'redenciones.php'],
-        ['titulo' => 'Reportes', 'icono' => 'file-earmark-bar-graph-fill', 'color' => 'secondary', 'url' => 'reportes.php']
+        ['titulo' => 'Estudiantes', 'icono' => 'people-fill', 'color' => 'primary', 'url' => 'subdirector_estudiantes.php'],
+        ['titulo' => 'Maestros', 'icono' => 'person-badge-fill', 'color' => 'success', 'url' => 'subdirector_maestros.php'],
+        ['titulo' => 'Grados y Secciones', 'icono' => 'collection-fill', 'color' => 'warning', 'url' => 'subdirector_grados.php'],
+        ['titulo' => 'Deméritos', 'icono' => 'flag-fill', 'color' => 'danger', 'url' => 'subdirector_demeritos.php'],
+        ['titulo' => 'Redenciones', 'icono' => 'hand-thumbs-up-fill', 'color' => 'info', 'url' => 'subdirector_redenciones.php'],
     ]
 ];
 
