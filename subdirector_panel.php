@@ -1,7 +1,7 @@
 <?php
 session_start();
 
-if (!isset($_SESSION['rol']) || $_SESSION['rol'] != 2) {
+if (!isset($_SESSION['rol']) || $_SESSION['rol'] != 3) {
     header("Location: index.php");
     exit();
 }
@@ -12,9 +12,9 @@ $nombre = $_SESSION['nombre_completo'];
 // CONFIGURACIÓN ÚNICA - Solo edita aquí
 // ============================================
 $config = [
-    'titulo_sistema' => 'Director',
-    'icono_sistema' => 'mortarboard-fill',
-    'color_sidebar' => '#1a1d29',
+    'titulo_sistema' => 'Subdirector',
+    'icono_sistema' => 'person-workspace',
+    'color_sidebar' => '#2c3e50',
     
     'modulos' => [
         ['titulo' => 'Estudiantes', 'icono' => 'people-fill', 'color' => 'primary', 'url' => 'estudiantes.php'],
@@ -22,11 +22,12 @@ $config = [
         ['titulo' => 'Grados y Secciones', 'icono' => 'collection-fill', 'color' => 'warning', 'url' => 'grados.php'],
         ['titulo' => 'Deméritos', 'icono' => 'flag-fill', 'color' => 'danger', 'url' => 'demeritos.php'],
         ['titulo' => 'Redenciones', 'icono' => 'hand-thumbs-up-fill', 'color' => 'info', 'url' => 'redenciones.php'],
+        ['titulo' => 'Reportes', 'icono' => 'file-earmark-bar-graph-fill', 'color' => 'secondary', 'url' => 'reportes.php']
     ]
 ];
 
 // Auto-generar menú desde módulos + Dashboard al inicio
-$menuItems = [['url' => 'director_panel.php', 'icono' => 'speedometer2', 'texto' => 'Dashboard']];
+$menuItems = [['url' => 'subdirector.php', 'icono' => 'speedometer2', 'texto' => 'Dashboard']];
 foreach($config['modulos'] as $m) {
     $menuItems[] = ['url' => $m['url'], 'icono' => $m['icono'], 'texto' => $m['titulo']];
 }

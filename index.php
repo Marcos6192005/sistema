@@ -305,7 +305,7 @@ if($_SERVER['REQUEST_METHOD'] == 'POST') {
                 </div>
                 <?php endif; ?>
                 
-                <form method="POST" action="login.php" id="loginForm">
+                <form method="POST" action="index.php" id="loginForm">
                     <div class="mb-3">
                         <label for="correo" class="form-label">
                             <i class="bi bi-envelope-fill"></i> Correo Electrónico

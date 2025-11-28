@@ -56,7 +56,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
         $stmt2->execute();
 
-        header("Location: login.php?registrado_estudiante=1");
+        header("Location: index.php?registrado_estudiante=1");
         exit();
 
     } catch (PDOException $e) {

@@ -1,5 +1,6 @@
 <?php
 session_start();
+<<<<<<< HEAD
 if (!isset($_SESSION['usuario_id'])) {
     header("Location: login.php");
     exit();
@@ -20,6 +21,15 @@ if (!$usuario || $usuario['id_rol'] != 1) {
 
 $nombre = $usuario['nombre_completo'];
 $dui = $usuario['correo']; // ⚠️ Cámbialo si luego agregas el campo DUI real
+=======
+if (!isset($_SESSION['usuario'])) {
+    header("Location: index.php");
+    exit();
+}
+
+$nombre = $_SESSION['nombre_completo'] ?? 'Ministra';
+$dui = $_SESSION['dui'] ?? 'N/A';
+>>>>>>> b88fd3d629337341a1c4cff9acf51386e9cd6ce0
 ?>
 
 <!DOCTYPE html>
@@ -75,6 +85,19 @@ $dui = $usuario['correo']; // ⚠️ Cámbialo si luego agregas el campo DUI rea
 
 <div class="contenedor">
 
+<<<<<<< HEAD
+=======
+    <!-- NUEVO: Ingresar datos -->
+    <div class="card">
+        <h2>📝 Ingresar Nuevos Datos</h2>
+        <p>Registrar nuevos usuarios, instituciones y centros escolares.</p>
+
+        <a href="registro_director.php">➕ Registrar Director</a><br>
+        <a href="registro_subdirector.php">➕ Registrar Subdirector</a><br>
+    </div>
+
+    <!-- Reportes Nacionales -->
+>>>>>>> b88fd3d629337341a1c4cff9acf51386e9cd6ce0
     <div class="card">
         <h2>📊 Reportes Nacionales</h2>
         <a href="reportes_nacionales.php">Ver reportes nacionales</a>

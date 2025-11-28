@@ -18,7 +18,7 @@ if($_SERVER['REQUEST_METHOD']=="POST"){
         $_SESSION['usuario']=$nombreUsuario;
             header('location:index.php');
     }else{
-    header('location:login.php?error=true');
+    header('location:index.php?error=true');
     }
 }
 ?>
