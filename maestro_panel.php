@@ -1,7 +1,7 @@
 <?php
 session_start();
 
-if (!isset($_SESSION['rol']) || $_SESSION['rol'] != 2) {
+if (!isset($_SESSION['rol']) || $_SESSION['rol'] != 4) {
     header("Location: index.php");
     exit();
 }
@@ -12,21 +12,19 @@ $nombre = $_SESSION['nombre_completo'];
 // CONFIGURACIÓN ÚNICA - Solo edita aquí
 // ============================================
 $config = [
-    'titulo_sistema' => 'Director',
-    'icono_sistema' => 'mortarboard-fill',
-    'color_sidebar' => '#1a1d29',
+    'titulo_sistema' => 'Maestro',
+    'icono_sistema' => 'person-video3',
+    'color_sidebar' => '#16a085',
     
     'modulos' => [
-        ['titulo' => 'Estudiantes', 'icono' => 'people-fill', 'color' => 'primary', 'url' => 'estudiantes.php'],
-        ['titulo' => 'Maestros', 'icono' => 'person-badge-fill', 'color' => 'success', 'url' => 'maestros.php'],
-        ['titulo' => 'Grados y Secciones', 'icono' => 'collection-fill', 'color' => 'warning', 'url' => 'grados.php'],
-        ['titulo' => 'Deméritos', 'icono' => 'flag-fill', 'color' => 'danger', 'url' => 'demeritos.php'],
-        ['titulo' => 'Redenciones', 'icono' => 'hand-thumbs-up-fill', 'color' => 'info', 'url' => 'redenciones.php'],
+        ['titulo' => 'Estudiantes', 'icono' => 'people-fill', 'color' => 'primary', 'url' => 'maestro_estudiantes.php'],
+        ['titulo' => 'Mis Secciones', 'icono' => 'diagram-3-fill', 'color' => 'success', 'url' => 'maestro_secciones.php'],
+        ['titulo' => 'Deméritos', 'icono' => 'exclamation-triangle-fill', 'color' => 'danger', 'url' => 'maestro_demeritos.php'],
     ]
 ];
 
 // Auto-generar menú desde módulos + Dashboard al inicio
-$menuItems = [['url' => 'director_panel.php', 'icono' => 'speedometer2', 'texto' => 'Dashboard']];
+$menuItems = [['url' => 'maestro_panel  .php', 'icono' => 'speedometer2', 'texto' => 'Dashboard']];
 foreach($config['modulos'] as $m) {
     $menuItems[] = ['url' => $m['url'], 'icono' => $m['icono'], 'texto' => $m['titulo']];
 }
@@ -40,20 +38,20 @@ foreach($config['modulos'] as $m) {
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
     <style>
-        :root{--sb-bg:<?= $config['color_sidebar'] ?>;--sb-hv:#2d3142;--grad:linear-gradient(135deg,#667eea 0%,#764ba2 100%)}
+        :root{--sb-bg:<?= $config['color_sidebar'] ?>;--sb-hv:#138d75;--grad:linear-gradient(135deg,#16a085 0%,#138d75 100%)}
         *{margin:0;padding:0;box-sizing:border-box}
         body{font-family:'Segoe UI',sans-serif;background:#f8f9fa;overflow-x:hidden}
         .sb{position:fixed;top:0;left:0;height:100vh;width:260px;background:var(--sb-bg);padding:20px 0;z-index:1000;box-shadow:4px 0 10px rgba(0,0,0,.1);overflow-y:auto}
         .sb-hd{padding:20px;text-align:center;border-bottom:1px solid rgba(255,255,255,.1);margin-bottom:20px}
         .sb-hd h4{color:#fff;font-weight:600;font-size:1.3rem;margin-top:10px}
-        .sb-hd i{font-size:2.5rem;color:#667eea}
+        .sb-hd i{font-size:2.5rem;color:#fff}
         .nl{color:rgba(255,255,255,.7);padding:12px 20px;display:flex;align-items:center;text-decoration:none;transition:.3s;margin:5px 10px;border-radius:8px;white-space:nowrap}
         .nl:hover{background:var(--sb-hv);color:#fff;transform:translateX(5px)}
         .nl.active{background:var(--grad);color:#fff}
         .nl i{margin-right:12px;font-size:1.2rem;width:25px;flex-shrink:0}
         .nl span{flex:1}
         .lo{margin-top:20px;width:calc(100% - 20px);margin-left:10px;margin-right:10px}
-        .lo:hover{background:#dc3545;color:#fff!important}
+        .lo:hover{background:#e74c3c;color:#fff!important}
         .mc{margin-left:260px;padding:30px;min-height:100vh}
         .ch{background:#fff;padding:25px 30px;border-radius:15px;box-shadow:0 2px 10px rgba(0,0,0,.05);margin-bottom:30px}
         .ch h2{font-weight:700;color:#2d3142;margin:0}
@@ -70,7 +68,6 @@ foreach($config['modulos'] as $m) {
         .bg-warning-light{background:rgba(255,193,7,.1);color:#ffc107}
         .bg-danger-light{background:rgba(220,53,69,.1);color:#dc3545}
         .bg-info-light{background:rgba(23,162,184,.1);color:#17a2b8}
-        .bg-secondary-light{background:rgba(108,117,125,.1);color:#6c757d}
         @keyframes fi{from{opacity:0;transform:translateY(30px)}to{opacity:1;transform:translateY(0)}}
         .cd{animation:fi .5s ease forwards;opacity:0}
         <?php foreach($config['modulos'] as $i => $m): ?>.cd:nth-child(<?= $i+1 ?>){animation-delay:<?= ($i+1)*0.1 ?>s}<?php endforeach; ?>
@@ -99,7 +96,7 @@ foreach($config['modulos'] as $m) {
     <div class="mc">
         <div class="ch">
             <h2>👋 Bienvenido, <?= htmlspecialchars($nombre) ?></h2>
-            <p class="text-muted mb-0">Panel de administración</p>
+            <p class="text-muted mb-0">Panel de gestión docente</p>
         </div>
         <div class="row g-4">
             <?php foreach($config['modulos'] as $m): ?>

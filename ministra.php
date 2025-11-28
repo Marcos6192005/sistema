@@ -1,10 +1,12 @@
 <?php
 session_start();
 if (!isset($_SESSION['usuario'])) {
-    header("Location: login.php");
+    header("Location: index.php");
     exit();
 }
 
+$nombre = $_SESSION['nombre_completo'] ?? 'Ministra';
+$dui = $_SESSION['dui'] ?? 'N/A';
 ?>
 
 <!DOCTYPE html>
@@ -62,6 +64,15 @@ if (!isset($_SESSION['usuario'])) {
 </div>
 
 <div class="contenedor">
+
+    <!-- NUEVO: Ingresar datos -->
+    <div class="card">
+        <h2>📝 Ingresar Nuevos Datos</h2>
+        <p>Registrar nuevos usuarios, instituciones y centros escolares.</p>
+
+        <a href="registro_director.php">➕ Registrar Director</a><br>
+        <a href="registro_subdirector.php">➕ Registrar Subdirector</a><br>
+    </div>
 
     <!-- Reportes Nacionales -->
     <div class="card">

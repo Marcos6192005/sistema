@@ -1,4 +1,4 @@
-<?php   
+<?php
 require 'db_connect.php';
 
 $id = $_POST['id_departamento'];
